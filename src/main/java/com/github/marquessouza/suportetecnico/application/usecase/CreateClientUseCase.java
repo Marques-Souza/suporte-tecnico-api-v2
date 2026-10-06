@@ -18,9 +18,20 @@ public class CreateClientUseCase {
 
     public ClientResponse execute(CreateClientRequest request) {
         Client client = new Client(
-                UUID.randomUUID(), request.name(), request.cpf(), request.phone());
+                UUID.randomUUID(),
+                request.name(),
+                request.cpf(),
+                request.phone()
+        );
+
+
         Client savedClient = clientRepository.save(client);
-        return new ClientResponse(savedClient.getId(), savedClient.getName(), savedClient.getCpf(), savedClient.getPhone());
+        return new ClientResponse(
+                savedClient.getId(),
+                savedClient.getName(),
+                savedClient.getCpf(),
+                savedClient.getPhone()
+        );
 
     }
 }
