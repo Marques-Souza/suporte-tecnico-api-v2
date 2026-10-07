@@ -15,15 +15,9 @@ public class FindClientByIdUseCase {
         this.clientRepository = clientRepository;
     }
 
-    public ClientResponse execute(UUID id){
+    public ClientResponse execute(UUID id) {
         Client client = clientRepository.findById(id)
                 .orElseThrow(ClientNotFoundException::new);
-
-        return new ClientResponse(
-                client.getId(),
-                client.getName(),
-                client.getCpf(),
-                client.getPhone()
-        );
+        return ClientResponse.from(client);
     }
 }

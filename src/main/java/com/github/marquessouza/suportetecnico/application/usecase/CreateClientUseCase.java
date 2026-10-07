@@ -26,19 +26,13 @@ public class CreateClientUseCase {
                 request.phone()
         );
 
-
         Client savedClient = clientRepository.save(client);
-        return new ClientResponse(
-                savedClient.getId(),
-                savedClient.getName(),
-                savedClient.getCpf(),
-                savedClient.getPhone()
-        );
+        return ClientResponse.from(savedClient);
 
     }
 
-    private void ensureCpfIsNotRegistered(String cpf){
-        if (clientRepository.findByCpf(cpf).isPresent()){
+    private void ensureCpfIsNotRegistered(String cpf) {
+        if (clientRepository.findByCpf(cpf).isPresent()) {
             throw new ClientAlreadyExistsException();
         }
 
