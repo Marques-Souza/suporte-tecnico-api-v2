@@ -18,6 +18,7 @@ public class CreateClientUseCase {
     }
 
     public ClientResponse execute(CreateClientRequest request) {
+        ensureCpfIsRegistered(request.cpf());
         Client client = new Client(
                 UUID.randomUUID(),
                 request.name(),
