@@ -18,7 +18,7 @@ public class CreateClientUseCase {
     }
 
     public ClientResponse execute(CreateClientRequest request) {
-        ensureCpfIsRegistered(request.cpf());
+        ensureCpfIsNotRegistered(request.cpf());
         Client client = new Client(
                 UUID.randomUUID(),
                 request.name(),
@@ -37,7 +37,7 @@ public class CreateClientUseCase {
 
     }
 
-    private void ensureCpfIsRegistered(String cpf){
+    private void ensureCpfIsNotRegistered(String cpf){
         if (clientRepository.findByCpf(cpf).isPresent()){
             throw new ClientAlreadyExistsException();
         }
