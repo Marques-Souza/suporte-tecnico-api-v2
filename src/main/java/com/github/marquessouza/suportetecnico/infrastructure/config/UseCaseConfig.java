@@ -3,6 +3,7 @@ package com.github.marquessouza.suportetecnico.infrastructure.config;
 import com.github.marquessouza.suportetecnico.application.usecase.CreateClientUseCase;
 import com.github.marquessouza.suportetecnico.application.usecase.FindClientByIdUseCase;
 import com.github.marquessouza.suportetecnico.application.usecase.ListClientsUseCase;
+import com.github.marquessouza.suportetecnico.application.usecase.UpdateClientUseCase;
 import com.github.marquessouza.suportetecnico.domain.repository.ClientRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,5 +24,10 @@ public class UseCaseConfig {
     @Bean
     public ListClientsUseCase listClientsUseCase(ClientRepository clientRepository){
         return new ListClientsUseCase(clientRepository);
+    }
+
+    @Bean
+    public UpdateClientUseCase updateClientUseCase(ClientRepository clientRepository){
+        return new UpdateClientUseCase(clientRepository);
     }
 }
