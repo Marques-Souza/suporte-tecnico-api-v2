@@ -1,6 +1,6 @@
 package com.github.marquessouza.suportetecnico.application.usecase;
 
-import com.github.marquessouza.suportetecnico.application.dto.CreateClientRequest;
+import com.github.marquessouza.suportetecnico.application.dto.CreateTechnicianRequest;
 import com.github.marquessouza.suportetecnico.application.dto.TechnicianResponse;
 import com.github.marquessouza.suportetecnico.domain.exception.TechnicianAlreadyExistsException;
 import com.github.marquessouza.suportetecnico.domain.model.Technician;
@@ -16,7 +16,7 @@ public class CreateTechnicianUseCase {
         this.technicianRepository = technicianRepository;
     }
 
-    public TechnicianResponse execute(CreateClientRequest request){
+    public TechnicianResponse execute(CreateTechnicianRequest request){
        ensureCpfIsNotRegistered(request.cpf());
 
         Technician technician = new Technician(

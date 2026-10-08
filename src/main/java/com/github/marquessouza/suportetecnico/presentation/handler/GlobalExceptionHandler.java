@@ -2,6 +2,8 @@ package com.github.marquessouza.suportetecnico.presentation.handler;
 
 import com.github.marquessouza.suportetecnico.domain.exception.ClientAlreadyExistsException;
 import com.github.marquessouza.suportetecnico.domain.exception.ClientNotFoundException;
+import com.github.marquessouza.suportetecnico.domain.exception.TechnicianAlreadyExistsException;
+import com.github.marquessouza.suportetecnico.domain.exception.TechnicianNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.validation.FieldError;
@@ -38,5 +40,15 @@ public class GlobalExceptionHandler {
     public ProblemDetail handleClientNotFound(ClientNotFoundException ex){
         return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
 
+    }
+
+    @ExceptionHandler(TechnicianAlreadyExistsException.class)
+    public ProblemDetail handlerTechnicianAlreadyExistsException(TechnicianAlreadyExistsException ex){
+        return ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, ex.getMessage());
+    }
+
+    @ExceptionHandler(TechnicianNotFoundException.class)
+    public ProblemDetail handleTechnicianNotFound(TechnicianNotFoundException ex){
+        return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 }
