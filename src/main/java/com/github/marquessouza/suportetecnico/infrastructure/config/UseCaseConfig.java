@@ -1,7 +1,9 @@
 package com.github.marquessouza.suportetecnico.infrastructure.config;
 
+import com.github.marquessouza.suportetecnico.application.dto.UpdateOrderStatusRequest;
 import com.github.marquessouza.suportetecnico.application.usecase.*;
 import com.github.marquessouza.suportetecnico.domain.repository.ClientRepository;
+import com.github.marquessouza.suportetecnico.domain.repository.OrderRepository;
 import com.github.marquessouza.suportetecnico.domain.repository.TechnicianRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -48,5 +50,26 @@ public class UseCaseConfig {
     @Bean
     public UpdateTechnicianUseCase updateTechnicianUseCase(TechnicianRepository technicianRepository){
         return new UpdateTechnicianUseCase(technicianRepository);
+    }
+
+    @Bean
+    public CreateOrderUseCase createOrderUseCase(OrderRepository orderRepository,
+                                                 ClientRepository clientRepository,
+                                                 TechnicianRepository technicianRepository){
+        return new CreateOrderUseCase(orderRepository, clientRepository, technicianRepository);
+    }
+
+    @Bean
+    public FindOrderByIdUseCase findOrderByIdUseCase(OrderRepository orderRepository){
+        return new FindOrderByIdUseCase(orderRepository);
+    }
+
+    @Bean
+    public ListOrdersUseCase listOrdersUseCase(OrderRepository orderRepository){
+        return new ListOrdersUseCase(orderRepository);
+    }
+
+    public UpdateOrderStatusUseCase updateOrderStatusUseCase(OrderRepository orderRepository){
+        return new UpdateOrderStatusUseCase(orderRepository);
     }
 }
