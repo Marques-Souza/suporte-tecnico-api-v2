@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public class Order {
 
-    private final UUID id ;
+    private final UUID id;
     private final String description;
     private final OrderStatus status;
     private final UUID clientId;
@@ -24,23 +24,40 @@ public class Order {
         this.createdAt = createdAt;
     }
 
-    public static Order open(UUID clientId, UUID technicianId, String description){
+    public static Order open(UUID clientId, UUID technicianId, String description) {
         return new Order(UUID.randomUUID(), description, OrderStatus.OPEN,
                 clientId, technicianId, LocalDateTime.now());
     }
 
-    public Order changeStatusTo(OrderStatus newStatus){
-        if (!status.canTransitionTo(newStatus)){
+    public Order changeStatusTo(OrderStatus newStatus) {
+        if (!status.canTransitionTo(newStatus)) {
             throw new InvalidOrderStatusTransitionException(status, newStatus);
         }
-        return new Order(id, description, status, clientId, technicianId, LocalDateTime.now());
+        return new Order(id, description, newStatus, clientId, technicianId, createdAt);
     }
 
-    public UUID getId(){return id;}
-    public  String getDescription(){return description;}
-    public OrderStatus getStatus(){return status;}
-    public UUID getClientId(){return clientId;}
-    public UUID getTechnicianId(){return technicianId;}
-    public LocalDateTime getCreatedAt(){return createdAt;}
+    public UUID getId() {
+        return id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public UUID getClientId() {
+        return clientId;
+    }
+
+    public UUID getTechnicianId() {
+        return technicianId;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
 
 }
