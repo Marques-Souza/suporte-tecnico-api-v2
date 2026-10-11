@@ -25,8 +25,8 @@ public class UpdateUserUseCase {
 
         User updatedUser = new User(
                 user.getId(),
-                user.getName(),
-                user.getEmail(),
+                request.name(),
+                request.email(),
                 user.getPasswordHash(),
                 user.getRole()
 
