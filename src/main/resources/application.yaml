@@ -21,3 +21,7 @@ app:
     admin:
       email: ${ADMIN_EMAIL:admin@email.com}
       password: ${ADMIN_PASSWORD:admin1518}
+
+server:
+  error:
+    include-stacktrace: never
