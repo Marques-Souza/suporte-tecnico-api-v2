@@ -6,6 +6,8 @@ import com.github.marquessouza.suportetecnico.application.dto.UpdateUserRequest;
 import com.github.marquessouza.suportetecnico.application.dto.UserResponse;
 import com.github.marquessouza.suportetecnico.application.usecase.*;
 import com.github.marquessouza.suportetecnico.domain.model.User;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/users")
+@Tag(name = "Users", description = "gerenciamento de usuários")
 public class UserController {
 
     private final CreateUserUseCase createUserUseCase;
@@ -33,29 +36,34 @@ public class UserController {
     }
 
     @PostMapping
+    @Operation(summary = "Cadastra um usuário")
     public ResponseEntity<UserResponse> create(@Valid @RequestBody CreateUserRequest request){
         UserResponse response = createUserUseCase.execute(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Busca um usuário por ID")
     public ResponseEntity<UserResponse> findById(@PathVariable UUID id){
         return ResponseEntity.ok(findUserByIdUseCase.execute(id));
     }
 
     @GetMapping
+    @Operation(summary = "Lista os usuários")
     public ResponseEntity<List<UserResponse>> findAll(){
         return ResponseEntity.ok(listUsersUseCase.execute());
     }
 
 
     @PutMapping("/{id}")
+    @Operation(summary = "Atualiza um usuário")
     public ResponseEntity<UserResponse> update(@PathVariable UUID id, @Valid @RequestBody UpdateUserRequest request){
         return ResponseEntity.ok(updateUserUseCase.execute(id, request));
 
     }
 
     @PatchMapping("/{id}/password")
+    @Operation(summary = "Atualiza a senha de um usuário")
     public ResponseEntity<Void> updatePassword(@PathVariable UUID id, @Valid @RequestBody UpdateUserPasswordRequest request){
         updateUserPasswordUseCase.execute(id, request);
         return ResponseEntity.noContent().build();

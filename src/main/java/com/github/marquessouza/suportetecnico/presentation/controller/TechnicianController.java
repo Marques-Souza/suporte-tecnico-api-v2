@@ -7,6 +7,8 @@ import com.github.marquessouza.suportetecnico.application.usecase.CreateTechnici
 import com.github.marquessouza.suportetecnico.application.usecase.FindTechnicianByIdUseCase;
 import com.github.marquessouza.suportetecnico.application.usecase.ListTechniciansUseCase;
 import com.github.marquessouza.suportetecnico.application.usecase.UpdateTechnicianUseCase;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/technicians")
+@Tag(name = "Technicians", description = "gerenciamento de técnicos")
 public class TechnicianController {
 
     private final CreateTechnicianUseCase createTechnicianUseCase;
@@ -35,22 +38,27 @@ public class TechnicianController {
     }
 
     @PostMapping
+    @Operation(summary = "Cadastra um técnico")
     public ResponseEntity<TechnicianResponse> create(@Valid @RequestBody CreateTechnicianRequest request){
         TechnicianResponse response = createTechnicianUseCase.execute(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+
     @GetMapping("/{id}")
+    @Operation(summary = "Buscar técnico por ID")
     public ResponseEntity<TechnicianResponse> findById(@PathVariable UUID id){
         return ResponseEntity.ok(findTechnicianByIdUseCase.execute(id));
     }
 
     @GetMapping
+    @Operation(summary = "Lista os técnicos")
     public ResponseEntity<List<TechnicianResponse>> findAll(){
         return ResponseEntity.ok(listTechniciansUseCase.execute());
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Atualiza um técnico")
     public ResponseEntity<TechnicianResponse> update(@PathVariable UUID id, @Valid @RequestBody UpdateTechnicianRequest request){
         return ResponseEntity.ok(updateTechnicianUseCase.execute(id, request));
     }
