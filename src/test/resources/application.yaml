@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: suporte-tecnico-api-v2
+
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: false
+
+app:
+  security:
+    jwt:
+      secret: test-only-jwt-secret-must-have-at-least-32-characters
+      expiration-minutes: 30
+  initialization:
+    admin:
+      email: ${ADMIN_EMAIL:admin@email.com}
+      password: ${ADMIN_PASSWORD:admin1518}
+
+server:
+  error:
+    include-stacktrace: never

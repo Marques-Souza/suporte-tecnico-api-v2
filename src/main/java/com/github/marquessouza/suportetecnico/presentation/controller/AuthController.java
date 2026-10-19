@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/auth")
 @Tag(name = "Authentication", description = "Autenticação de usuários")
-public class authController {
+public class AuthController {
 
     private final AuthenticateUserUseCase authenticateUserUseCase;
 
-    public authController(AuthenticateUserUseCase authenticateUserUseCase) {
+    public AuthController(AuthenticateUserUseCase authenticateUserUseCase) {
         this.authenticateUserUseCase = authenticateUserUseCase;
     }
 
