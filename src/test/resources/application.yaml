@@ -3,13 +3,13 @@ spring:
     name: suporte-tecnico-api-v2
 
   datasource:
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
+    url: jdbc:postgresql://localhost:5432/suporte_api_test
+    username: ${DB_USERNAME:postgres}
     password: ${DB_PASSWORD}
 
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     open-in-view: false
 
 app:
@@ -19,8 +19,8 @@ app:
       expiration-minutes: 30
   initialization:
     admin:
-      email: ${ADMIN_EMAIL:admin@email.com}
-      password: ${ADMIN_PASSWORD:admin1518}
+      email: admin@gmail.com
+      password: admin123
 
 server:
   error:

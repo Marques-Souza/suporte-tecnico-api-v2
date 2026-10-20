@@ -19,8 +19,8 @@ app:
       expiration-minutes: 30
   initialization:
     admin:
-      email: ${ADMIN_EMAIL:admin@email.com}
-      password: ${ADMIN_PASSWORD:admin1518}
+      email: ${ADMIN_EMAIL}
+      password: ${ADMIN_PASSWORD}
 
 server:
   error:

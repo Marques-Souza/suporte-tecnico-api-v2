@@ -1,0 +1,32 @@
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: suporte_api
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: demo-db-password
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d suporte_api"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/suporte_api
+      DB_USERNAME: postgres
+      DB_PASSWORD: demo-db-password
+      JWT_SECRET: demo-only-jwt-secret-change-me-0123456789abcdef
+      ADMIN_EMAIL: admin@demo.com
+      ADMIN_PASSWORD: demo-admin-123
+
+volumes:
+  db-data:
