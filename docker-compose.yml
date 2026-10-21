@@ -1,6 +1,7 @@
 services:
   db:
     image: postgres:17
+    container_name: suporte-db
     environment:
       POSTGRES_DB: suporte_api
       POSTGRES_USER: postgres
@@ -15,6 +16,8 @@ services:
 
   api:
     build: .
+    image: suporte-tecnico
+    container_name: suporte-api
     depends_on:
       db:
         condition: service_healthy

@@ -8,7 +8,7 @@ RUN mvn -q package -DskipTests
 
 FROM eclipse-temurin:21-jre
 WORKDIR /app
-RUN useradd --sysstem --no-create-home appuser
+RUN useradd --system --no-create-home appuser
 COPY --from=build /app/target/*.jar app.jar
 USER appuser
 EXPOSE 8080
