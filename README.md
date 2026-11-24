@@ -1,3 +1,4 @@
+[![Suporte Tecnico API CI](https://github.com/Marques-Souza/suporte-tecnico-api-v2/actions/workflows/ci.yml/badge.svg)](https://github.com/Marques-Souza/suporte-tecnico-api-v2/actions/workflows/ci.yml)
 # Suporte Técnico API
 
 Esta API organiza o atendimento de uma assistência técnica: nela é possível cadastrar clientes, técnicos e usuários, abrir ordens de serviço e acompanhar o andamento de cada ordem.
